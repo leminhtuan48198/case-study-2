@@ -2,6 +2,7 @@ package view;
 
 import controller.ProductController;
 import controller.ShopController;
+import model.Fruit;
 import model.Meat;
 import model.Shop;
 
@@ -57,7 +58,7 @@ public class Main {
                     System.out.println("Mời bạn nhập id thịt cần sửa");
                     Scanner scanner5 = new Scanner(System.in);
                      id =scanner5.nextLine();
-                    index= tuan.getMeatById(id);
+                    index= tuan.getIndexMeatById(id);
                     if(index==-1){
                         System.out.println("Bạn đã nhập sai id thịt");
                     }else{
@@ -66,7 +67,7 @@ public class Main {
                          name = scanner6.nextLine();
                         System.out.println("Mời bạn nhập giá");
                         Scanner scanner7 = new Scanner(System.in);
-                        Double price = scanner7.nextDouble();
+                        double price = scanner7.nextDouble();
                         System.out.println("Mời bạn nhập ngày sản xuất");
                         Scanner scanner8 = new Scanner(System.in);
                         int day = scanner8.nextInt();
@@ -89,17 +90,107 @@ public class Main {
                             System.out.println("Cửa hàng bạn nhập không đúng");
                         }
                     }
+                    break;
                 case 7:
+                    System.out.println("Mời bạn nhập id thịt cần xóa");
+                    Scanner scanner6=new Scanner(System.in);
+                     id =scanner6.nextLine();
+                    index = tuan.getIndexMeatById(id);
+                    tuan.removeMeat(index);
+                    break;
 
                 case 8:
+                    System.out.println("Mời bạn nhập id cửa hàng");
+                    Scanner scanner7=new Scanner(System.in);
+                    id=scanner7.nextLine();
+                     shop= boss.getShopById(id);
+                     if(shop==null){
+                         System.out.println("Bạn nhập sai id cửa hàng");
+                     }else{
+                         Fruit fruit = getNewFruit(shop);
+                         tuan.addNewFruit(fruit);
+                         System.out.println("Thêm quả thành công");
+                     }
+                     break;
+
                 case 9:
+                    System.out.println("Mời bạn nhập id quả cần sửa");
+                    Scanner scanner8 = new Scanner(System.in);
+                    id =scanner8.nextLine();
+                    index= tuan.getIndexFruitById(id);
+                    if(index==-1){
+                        System.out.println("Bạn đã nhập sai id quả");
+                    }else{
+                        System.out.println("Mời bạn nhập id cửa hàng");
+                        Scanner scanner9=new Scanner(System.in);
+                        id=scanner9.nextLine();
+                        shop=boss.getShopById(id);
+                        if(shop==null){
+                            System.out.println("Id cửa hàng không hợp lệ");
+                        }else{
+                            System.out.println("Mời bạn nhâp tên quả");
+                            Scanner scanner10 = new Scanner(System.in);
+                            name = scanner10.nextLine();
+                            System.out.println("Mời bạn nhập giá");
+                            Scanner scanner11 = new Scanner(System.in);
+                            double price = scanner11.nextDouble();
+                            System.out.println("Mời bạn nhập ngày sản xuất");
+                            Scanner scanner12 = new Scanner(System.in);
+                            int day = scanner12.nextInt();
+                            System.out.println("Mời bạn nhập tháng sản xuất");
+                            Scanner scanner13= new Scanner(System.in);
+                            int month = scanner13.nextInt();
+                            System.out.println("Mời bạn nhập năm sản xuất");
+                            Scanner scanner14 = new Scanner(System.in);
+                            int year = scanner14.nextInt();
+                            System.out.println("Mời bạn nhập số lượng quả");
+                            Scanner scanner15 = new Scanner(System.in);
+                            int quantity = scanner15.nextInt();
+                            tuan.editFruit(index,name,shop,price,year,month,day,quantity);
+                        }
+                    }
+
+                    break;
                 case 10:
+                    System.out.println("Mời bạn nhập id quả cần xóa");
+                    Scanner scanner9=new Scanner(System.in);
+                    id =scanner9.nextLine();
+                    index = tuan.getIndexMeatById(id);
+                    tuan.removeMeat(index);
+                    break;
                 case 11:
                 case 0:
                     System.exit(0);
             }
         } while (choice!=0);
 
+    }
+
+    private static Fruit getNewFruit(Shop shop) {
+        Fruit fruit =null;
+        System.out.println("Mời bạn nhập id quả");
+        Scanner scanner = new Scanner(System.in);
+        String id = scanner.nextLine();
+        System.out.println("Mời bạn nhâp tên quả");
+        Scanner scanner1 = new Scanner(System.in);
+        String name = scanner1.nextLine();
+        System.out.println("Mời bạn nhập giá");
+        Scanner scanner2 = new Scanner(System.in);
+        double price = scanner2.nextDouble();
+        System.out.println("Mời bạn nhập ngày sản xuất");
+        Scanner scanner3 = new Scanner(System.in);
+        int day = scanner3.nextInt();
+        System.out.println("Mời bạn nhập tháng sản xuất");
+        Scanner scanner4 = new Scanner(System.in);
+        int month = scanner4.nextInt();
+        System.out.println("Mời bạn nhập năm sản xuất");
+        Scanner scanner5 = new Scanner(System.in);
+        int year = scanner5.nextInt();
+        System.out.println("Mời bạn nhập số lượng quả");
+        Scanner scanner6 = new Scanner(System.in);
+        int quantity = scanner6.nextInt();
+        fruit= new Fruit(id,name,shop,price,LocalDate.of(year,month,day),quantity);
+        return fruit;
     }
 
     private static Meat getNewMeat(ShopController boss) {
@@ -112,7 +203,7 @@ public class Main {
         String name = scanner1.nextLine();
         System.out.println("Mời bạn nhập giá");
         Scanner scanner2 = new Scanner(System.in);
-        Double price = scanner2.nextDouble();
+        double price = scanner2.nextDouble();
         System.out.println("Mời bạn nhập ngày sản xuất");
         Scanner scanner3 = new Scanner(System.in);
         int day = scanner3.nextInt();
