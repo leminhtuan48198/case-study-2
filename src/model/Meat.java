@@ -1,8 +1,9 @@
 package model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public class Meat extends Product implements ExpiredDate,Money {
+public class Meat extends Product implements ExpiredDate,Money, Serializable {
     private double weight;
 
     public Meat() {

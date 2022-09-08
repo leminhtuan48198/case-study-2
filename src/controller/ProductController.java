@@ -59,8 +59,16 @@ public class ProductController {
     public void removeMeat(int index){
         productList.remove(index);
     }
+    public void removeFruit(int index){
+        productList.remove(index);
+    }
     public void addNewFruit(Fruit fruit){
         productList.add(fruit);
+    }
+    public void displayAllProduct(){
+        for (int i = 0; i < productList.size(); i++) {
+            System.out.println(productList.get(i));
+        }
     }
 
 }

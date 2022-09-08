@@ -1,8 +1,9 @@
 package model;
 
+import java.io.Serializable;
 import java.util.LinkedList;
 
-public class Shop {
+public class Shop implements Serializable {
     private String id;
     private String name;
     private String address;

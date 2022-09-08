@@ -1,8 +1,9 @@
 package model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public abstract class Product {
+public abstract class Product implements Serializable {
     private String id;
     private String name;
     private Shop shop;

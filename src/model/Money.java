@@ -1,5 +1,7 @@
 package model;
 
-public interface Money {
+import java.io.Serializable;
+
+public interface Money extends Serializable {
     double getMoney();
 }
