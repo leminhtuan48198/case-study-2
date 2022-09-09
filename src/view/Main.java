@@ -11,68 +11,174 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        ShopController boss=new ShopController();
-        ProductController tuan=new ProductController("tuan");
+        ShopController boss = new ShopController("boss");
+        ProductController tuan= new ProductController("tuan");
+        displayMainScreen(boss,tuan);
+
+    }
+
+    private static void displayMainScreen(ShopController boss, ProductController tuan) {
+        int choice=0;
+        do{
+            System.out.println("--Danh mục--");
+            System.out.println("1. Quản lí cửa hàng");
+            System.out.println("2. Quản lí sản phẩm thịt");
+            System.out.println("3. Quản lí sản phẩm quả");
+            System.out.println("4. Các chức năng khác");
+            System.out.println("0. Kết thúc");
+            Scanner scanner=new Scanner(System.in);
+            choice=scanner.nextInt();
+            switch (choice){
+                case 1:
+                    displayShopMenu(boss,tuan);
+                    break;
+                case 2:
+                    displayMeatMenu(boss,tuan);
+                    break;
+                case 3:
+                    displayFruitMenu(boss,tuan);
+                    break;
+                case 4:
+                    displayOthers(boss,tuan);
+                    break;
+                case 0:
+                    System.exit(0);
+            }
+        } while (choice!=0);
+    }
+
+    private static void displayOthers(ShopController boss, ProductController tuan) {
+        int choice=0;
+        do{
+            System.out.println("--Danh mục các chức năng khác--");
+            System.out.println("1. Hiển thị tất cả sản phẩm");
+            System.out.println("2. Sắp xếp các sản phẩm theo Id");
+            System.out.println("3. Hủy bỏ các sản phẩm hết hạn");
+            System.out.println("0. Trở lại");
+            Scanner scanner=new Scanner(System.in);
+            choice=scanner.nextInt();
+            switch (choice){
+                case 1:
+                    tuan.displayAllProduct();
+                    break;
+                case 2:
+                    tuan.sortProductsById();
+                    break;
+                case 3:
+                    tuan.deleteOldProduct();
+                    break;
+                case 0:
+                    displayMainScreen(boss,tuan);
+            }
+        } while (choice!=0);
+    }
+
+    private static void displayShopMenu(ShopController boss, ProductController tuan) {
+        int choice=0;
+        do{
+            System.out.println("--Danh mục quản lí cửa hàng--");
+            System.out.println("1. Thêm cửa hàng");
+            System.out.println("2. Sửa thông tin cửa hàng theo Id");
+            System.out.println("3. Xóa cửa hàng theo Id");
+            System.out.println("4. Hiển thị thông tin các cửa hàng");
+            System.out.println("5. Tính tổng tiền của tất cả sản phẩm trong một cửa hàng");
+            System.out.println("0. Quay lại");
+            Scanner scanner=new Scanner(System.in);
+            choice =scanner.nextInt();
+            switch (choice){
+                case 1:
+                    Shop shop=getNewShop();
+                    boss.addNewShop(shop);
+                    break;
+                case 2:
+                    editShop(boss);
+                    break;
+                case 3:
+                    deleteShop(boss, tuan);
+                    break;
+                case 4:
+                    boss.displayShops();
+                    break;
+                case 0:
+                    displayMainScreen(boss,tuan);
+
+            }
+
+        }while(choice!=0);
+    }
+    private static void displayMeatMenu(ShopController boss, ProductController tuan) {
+        int choice=0;
+        do{
+            System.out.println("--Danh mục quản lí thịt--");
+            System.out.println("1. Thêm thịt");
+            System.out.println("2. Sửa thông tin thịt");
+            System.out.println("3. Xóa thịt");
+            System.out.println("0. Quay lại");
+            Scanner scanner=new Scanner(System.in);
+            choice =scanner.nextInt();
+            switch (choice){
+                case 1:
+                    addMeat(boss, tuan);
+                    break;
+                case 2:
+                    editMeat(boss, tuan);
+                    break;
+                case 3:
+                    removeMeat(tuan);
+                    break;
+                case 0:
+                    displayMainScreen(boss,tuan);
+
+            }
+
+        }while(choice!=0);
+    }
+    private static void displayFruitMenu(ShopController boss, ProductController tuan) {
+        int choice=0;
+        do{
+            System.out.println("--Danh mục quản lí hoa quả--");
+            System.out.println("1. Thêm quả");
+            System.out.println("2. Sửa thông tin quả");
+            System.out.println("3. Xóa quả");
+            System.out.println("0. Quay lại");
+            Scanner scanner=new Scanner(System.in);
+            choice =scanner.nextInt();
+            switch (choice){
+                case 1:
+                    addNewFruit(boss, tuan);
+                    break;
+
+                case 2:
+                    editFuit(boss, tuan);
+
+                    break;
+                case 3:
+                    deleteFruit(tuan);
+                    break;
+                case 0:
+                    displayMainScreen(boss,tuan);
+
+            }
+
+        }while(choice!=0);
+    }
+
+    private static void displayScreen(ShopController boss, ProductController tuan) {
         int choice=0;
         do {
             showMenu();
             Scanner scanner=new Scanner(System.in);
             choice=scanner.nextInt();
             switch (choice){
-                case 1:
-                    Shop shop=getNewShop();
-                    boss.addNewShop(shop);
-                break;
-                case 2:
-                    editShop(boss);
-                    break;
-                case 3:
-                    deleteShop(boss,tuan);
-                    break;
-                case 4:
-                    boss.displayShops();
-                    break;
-                case 5:
-                    addMeat(boss, tuan);
-                    break;
-                case 6:
-                    editMeat(boss, tuan);
-                    break;
-                case 7:
-                    removeMeat(tuan);
-                    break;
 
-                case 8:
-                    addNewFruit(boss, tuan);
-                    break;
 
-                case 9:
-                    deleteFruit(boss, tuan);
 
-                    break;
-                case 10:
-                    deleteFruit(tuan);
-                    break;
-                case 11:
-                    tuan.displayAllProduct();
-                    break;
-                case 12:
-                    getMoneyOfShop(tuan);
-                    break;
-                case 13:
-                    boss.sortShopsById();
-                    break;
-                case 14:
-                    tuan.sortProductsById();
-                    break;
-                case 15:
-                    tuan.deleteOldProduct();
-                    break;
+
+
                 case 0:
                     System.exit(0);
             }
         } while (choice!=0);
-
     }
 
     private static void getMoneyOfShop(ProductController tuan) {
@@ -195,7 +301,7 @@ public class Main {
         boss.editShop(index,name,address);
     }
 
-    private static void deleteFruit(ShopController boss, ProductController tuan) {
+    private static void editFuit(ShopController boss, ProductController tuan) {
         int index;
         String name;
         String id;
@@ -297,25 +403,6 @@ public class Main {
         return meat;
     }
 
-    private static void showMenu() {
-        System.out.println("--Danh mục--");
-        System.out.println("1. Thêm cửa hàng");
-        System.out.println("2. Sửa thông tin cửa hàng theo Id");
-        System.out.println("3. Xóa cửa hàng theo Id");
-        System.out.println("4. Hiển thị thông tin các cửa hàng");
-        System.out.println("5. Thêm thịt");
-        System.out.println("6. Sửa thông tin thịt");
-        System.out.println("7. Xóa thịt");
-        System.out.println("8. Thêm quả");
-        System.out.println("9. Sửa thông tin quả");
-        System.out.println("10. Xóa quả");
-        System.out.println("11. Hiển thị tất cả sản phẩm");
-        System.out.println("12. Tính tổng tiền của tất cả sản phẩm trong một cửa hàng");
-        System.out.println("13. Sắp xếp các cửa hàng theo Id");
-        System.out.println("14. Sắp xếp các sản phẩm theo Id");
-        System.out.println("15. Hủy bỏ các sản phẩm hết hạn");
-        System.out.println("0. Kết thúc");
-    }
 
     private static Shop getNewShop() {
         System.out.println("Mời bạn nhập Id cửa hàng");
