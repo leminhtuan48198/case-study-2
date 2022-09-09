@@ -362,7 +362,7 @@ public class Main {
         index=tuan.getIndexFruitById(id);
         }while (index>-1);
 
-        System.out.println("Mời bạn nhâp tên quả");
+        System.out.println("Mời bạn nhập tên quả");
         Scanner scanner1 = new Scanner(System.in);
         String name = scanner1.nextLine();
         System.out.println("Mời bạn nhập giá");
