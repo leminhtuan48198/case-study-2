@@ -3,7 +3,7 @@ package model;
 import java.io.Serializable;
 import java.util.LinkedList;
 
-public class Shop implements Serializable {
+public class Shop implements Comparable<Shop>,Serializable {
     private String id;
     private String name;
     private String address;
@@ -49,5 +49,10 @@ public class Shop implements Serializable {
                 ", name='" + name + '\'' +
                 ", address='" + address + '\'' +
                 '}';
+    }
+
+    @Override
+    public int compareTo(Shop shop) {
+        return this.id.compareTo(shop.getId());
     }
 }

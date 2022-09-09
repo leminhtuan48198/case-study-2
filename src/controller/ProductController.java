@@ -7,6 +7,7 @@ import model.Shop;
 import storage.product.ReadWriteProduct;
 
 import java.time.LocalDate;
+import java.util.Collections;
 import java.util.List;
 
 public class ProductController {
@@ -104,6 +105,12 @@ public class ProductController {
                 i--;
             }
         }
+        ReadWriteProduct.getInstance().writeData(productList);
         System.out.println("Đã xóa bỏ các sản phẩm hết hạn");
+    }
+
+    public void sortProductsById() {
+        Collections.sort(productList);
+        ReadWriteProduct.getInstance().writeData(productList);
     }
 }

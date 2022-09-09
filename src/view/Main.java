@@ -60,7 +60,11 @@ public class Main {
                     getMoneyOfShop(tuan);
                     break;
                 case 13:
+                    boss.sortShopsById();
+                    break;
                 case 14:
+                    tuan.sortProductsById();
+                    break;
                 case 15:
                     tuan.deleteOldProduct();
                     break;
@@ -75,7 +79,8 @@ public class Main {
         System.out.println("Mời bạn nhập id cửa hàng");
         Scanner scanner1=new Scanner(System.in);
         String idShop=scanner1.nextLine();
-        tuan.getSumOfMoney(idShop);
+
+        System.out.println("Tổng giá trị sản phẩm của cửa hàng là"+ tuan.getSumOfMoney(idShop));
     }
 
     private static void deleteFruit(ProductController tuan) {
@@ -309,6 +314,7 @@ public class Main {
         System.out.println("13. Sắp xếp các cửa hàng theo Id");
         System.out.println("14. Sắp xếp các sản phẩm theo Id");
         System.out.println("15. Hủy bỏ các sản phẩm hết hạn");
+        System.out.println("0. Kết thúc");
     }
 
     private static Shop getNewShop() {

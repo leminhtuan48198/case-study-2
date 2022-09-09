@@ -3,7 +3,7 @@ package model;
 import java.io.Serializable;
 import java.time.LocalDate;
 
-public abstract class Product implements ExpiredDate,Money, Serializable {
+public abstract class Product implements ExpiredDate,Money,Comparable<Product>, Serializable {
     private String id;
     private String name;
     private Shop shop;
@@ -70,5 +70,10 @@ public abstract class Product implements ExpiredDate,Money, Serializable {
                 ", price=" + price +
                 ", manufactureDate=" + manufactureDate +
                 '}';
+    }
+
+    @Override
+    public int compareTo(Product product) {
+        return this.id.compareTo(product.id);
     }
 }

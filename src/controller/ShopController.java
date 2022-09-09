@@ -4,6 +4,7 @@ import model.Shop;
 import storage.product.ReadWriteProduct;
 import storage.shop.ReadWriteShop;
 
+import java.util.Collections;
 import java.util.List;
 
 import static controller.ProductController.productList;
@@ -21,7 +22,6 @@ public class ShopController {
     public void addNewShop(Shop shop){
         shopList.add(shop);
         ReadWriteShop.getInstance().writeData(shopList);
-        ReadWriteProduct.getInstance().writeData(productList);
     }
     public int findShopIndexById(String id){
         int index=-1;
@@ -65,4 +65,9 @@ public class ShopController {
         return shop;
     }
 
+
+    public void sortShopsById() {
+        Collections.sort(shopList);
+        ReadWriteShop.getInstance().writeData(shopList);
+    }
 }
