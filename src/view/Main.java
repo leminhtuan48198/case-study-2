@@ -11,7 +11,7 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        ShopController boss = new ShopController("boss");
+        ShopController boss = new ShopController();
         ProductController tuan= new ProductController("tuan");
         displayMainScreen(boss,tuan);
 
@@ -82,12 +82,13 @@ public class Main {
             System.out.println("3. Xóa cửa hàng theo Id");
             System.out.println("4. Hiển thị thông tin các cửa hàng");
             System.out.println("5. Tính tổng tiền của tất cả sản phẩm trong một cửa hàng");
+            System.out.println("6. Hiển thị các sản phẩm trong một cửa hàng");
             System.out.println("0. Quay lại");
             Scanner scanner=new Scanner(System.in);
             choice =scanner.nextInt();
             switch (choice){
                 case 1:
-                    Shop shop=getNewShop();
+                    Shop shop=getNewShop(boss);
                     boss.addNewShop(shop);
                     break;
                 case 2:
@@ -99,6 +100,12 @@ public class Main {
                 case 4:
                     boss.displayShops();
                     break;
+                case 5:
+                    getMoneyOfShop(tuan);
+                    break;
+                case 6:
+                    displayProductsInShop(tuan);
+                    break;
                 case 0:
                     displayMainScreen(boss,tuan);
 
@@ -106,6 +113,14 @@ public class Main {
 
         }while(choice!=0);
     }
+
+    private static void displayProductsInShop(ProductController tuan) {
+        System.out.println("Mời bạn nhập id cửa hàng");
+        Scanner scanner= new Scanner(System.in);
+        String idShop=scanner.nextLine();
+        tuan.displayProductsInShop(idShop);
+    }
+
     private static void displayMeatMenu(ShopController boss, ProductController tuan) {
         int choice=0;
         do{
@@ -113,6 +128,7 @@ public class Main {
             System.out.println("1. Thêm thịt");
             System.out.println("2. Sửa thông tin thịt");
             System.out.println("3. Xóa thịt");
+            System.out.println("4. Hiển thị danh sách thịt");
             System.out.println("0. Quay lại");
             Scanner scanner=new Scanner(System.in);
             choice =scanner.nextInt();
@@ -126,6 +142,9 @@ public class Main {
                 case 3:
                     removeMeat(tuan);
                     break;
+                case 4:
+                    tuan.displayMeatList();
+                    break;
                 case 0:
                     displayMainScreen(boss,tuan);
 
@@ -133,6 +152,9 @@ public class Main {
 
         }while(choice!=0);
     }
+
+
+
     private static void displayFruitMenu(ShopController boss, ProductController tuan) {
         int choice=0;
         do{
@@ -140,6 +162,7 @@ public class Main {
             System.out.println("1. Thêm quả");
             System.out.println("2. Sửa thông tin quả");
             System.out.println("3. Xóa quả");
+            System.out.println("4. Hiển thị danh sách quả");
             System.out.println("0. Quay lại");
             Scanner scanner=new Scanner(System.in);
             choice =scanner.nextInt();
@@ -155,30 +178,15 @@ public class Main {
                 case 3:
                     deleteFruit(tuan);
                     break;
+                case 4:
+                    tuan.displayFruitList();
+                    break;
                 case 0:
                     displayMainScreen(boss,tuan);
 
             }
 
         }while(choice!=0);
-    }
-
-    private static void displayScreen(ShopController boss, ProductController tuan) {
-        int choice=0;
-        do {
-            showMenu();
-            Scanner scanner=new Scanner(System.in);
-            choice=scanner.nextInt();
-            switch (choice){
-
-
-
-
-
-                case 0:
-                    System.exit(0);
-            }
-        } while (choice!=0);
     }
 
     private static void getMoneyOfShop(ProductController tuan) {
@@ -209,7 +217,7 @@ public class Main {
         if(shop==null){
             System.out.println("Bạn nhập sai id cửa hàng");
         }else{
-            Fruit fruit = getNewFruit(shop);
+            Fruit fruit = getNewFruit(shop,tuan);
             tuan.addNewFruit(fruit);
             System.out.println("Thêm quả thành công");
         }
@@ -268,7 +276,7 @@ public class Main {
     }
 
     private static void addMeat(ShopController boss, ProductController tuan) {
-        Meat meat=getNewMeat(boss);
+        Meat meat=getNewMeat(boss,tuan);
         if(meat!=null){
             tuan.addNewMeat(meat);
         }else{
@@ -343,11 +351,17 @@ public class Main {
         }
     }
 
-    private static Fruit getNewFruit(Shop shop) {
+    private static Fruit getNewFruit(Shop shop,ProductController tuan) {
         Fruit fruit =null;
-        System.out.println("Mời bạn nhập id quả");
         Scanner scanner = new Scanner(System.in);
-        String id = scanner.nextLine();
+        int index;
+        String id;
+        do{
+        System.out.println("Mời bạn nhập id quả mới");
+         id= scanner.nextLine();
+        index=tuan.getIndexFruitById(id);
+        }while (index>-1);
+
         System.out.println("Mời bạn nhâp tên quả");
         Scanner scanner1 = new Scanner(System.in);
         String name = scanner1.nextLine();
@@ -370,11 +384,16 @@ public class Main {
         return fruit;
     }
 
-    private static Meat getNewMeat(ShopController boss) {
+    private static Meat getNewMeat(ShopController boss,ProductController tuan) {
         Meat meat =null;
-        System.out.println("Mời bạn nhập id thịt");
+        int index;
         Scanner scanner = new Scanner(System.in);
-        String id = scanner.nextLine();
+        String id;
+        do {
+            System.out.println("Mời bạn nhập id thịt mới");
+            id = scanner.nextLine();
+            index = tuan.getIndexMeatById(id);
+        }while (index>-1);
         System.out.println("Mời bạn nhâp tên thịt");
         Scanner scanner1 = new Scanner(System.in);
         String name = scanner1.nextLine();
@@ -404,10 +423,15 @@ public class Main {
     }
 
 
-    private static Shop getNewShop() {
-        System.out.println("Mời bạn nhập Id cửa hàng");
+    private static Shop getNewShop(ShopController boss) {
         Scanner scanner1=new Scanner(System.in);
-        String id =scanner1.nextLine();
+        String id;
+        int index;
+        do{
+            System.out.println("Mời bạn nhập Id cửa hàng");
+         id =scanner1.nextLine();
+         index=boss.findShopIndexById(id);
+    }while (index>-1);
         System.out.println("Mời bạn nhập tên cửa hàng");
         Scanner scanner2=new Scanner(System.in);
         String name =scanner2.nextLine();

@@ -113,4 +113,30 @@ public class ProductController {
         Collections.sort(productList);
         ReadWriteProduct.getInstance().writeData(productList);
     }
+    public void displayProductsInShop(String idShop){
+        for (int i = 0; i < productList.size(); i++) {
+            if(productList.get(i).getShop().getId().equals(idShop)){
+                System.out.println(productList.get(i));
+            }
+        }
+    }
+
+    public void displayMeatList() {
+        for (int i = 0; i < productList.size(); i++) {
+            if(productList.get(i) instanceof Meat){
+                Meat meat=(Meat)productList.get(i);
+                System.out.println(meat);
+            }
+
+        }
+    }
+
+    public void displayFruitList() {
+        for (int i = 0; i < productList.size(); i++) {
+            if(productList.get(i) instanceof Fruit){
+                Fruit fruit=(Fruit)productList.get(i);
+                System.out.println(fruit);
+            }
+        }
+    }
 }
