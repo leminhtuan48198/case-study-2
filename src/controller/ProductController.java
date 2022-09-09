@@ -7,7 +7,6 @@ import model.Shop;
 import storage.product.ReadWriteProduct;
 
 import java.time.LocalDate;
-import java.util.LinkedList;
 import java.util.List;
 
 public class ProductController {
@@ -85,5 +84,26 @@ public class ProductController {
             }
         }
         ReadWriteProduct.getInstance().writeData(productList);
+    }
+
+    public double getSumOfMoney(String idShop) {
+        double sum=0;
+        for (Product product:productList) {
+            if(product.getShop().getId().equals(idShop)){
+                 sum+= product.getMoney();
+        }
+
+        }
+        return sum;
+    }
+
+    public void deleteOldProduct() {
+        for (int i = 0; i < productList.size(); i++) {
+            if(productList.get(i).isExpired()){
+                productList.remove(i);
+                i--;
+            }
+        }
+        System.out.println("Đã xóa bỏ các sản phẩm hết hạn");
     }
 }

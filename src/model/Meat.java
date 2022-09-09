@@ -1,9 +1,12 @@
 package model;
 
 import java.io.Serializable;
+import java.time.Duration;
 import java.time.LocalDate;
 
-public class Meat extends Product implements ExpiredDate,Money, Serializable {
+import static java.time.temporal.ChronoUnit.DAYS;
+
+public class Meat extends Product implements Serializable {
     private double weight;
 
     public Meat() {
@@ -37,5 +40,13 @@ public class Meat extends Product implements ExpiredDate,Money, Serializable {
         return super.toString()+ "Meat{" +
                 "weight=" + weight +
                 '}';
+    }
+
+    @Override
+    public boolean isExpired() {
+        LocalDate now=LocalDate.now();
+        long number= DAYS.between(now,this.getExpiredDate());
+        return number<0;
+
     }
 }

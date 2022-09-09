@@ -4,7 +4,6 @@ import model.Shop;
 import storage.product.ReadWriteProduct;
 import storage.shop.ReadWriteShop;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static controller.ProductController.productList;

@@ -56,12 +56,26 @@ public class Main {
                 case 11:
                     tuan.displayAllProduct();
                     break;
-
+                case 12:
+                    getMoneyOfShop(tuan);
+                    break;
+                case 13:
+                case 14:
+                case 15:
+                    tuan.deleteOldProduct();
+                    break;
                 case 0:
                     System.exit(0);
             }
         } while (choice!=0);
 
+    }
+
+    private static void getMoneyOfShop(ProductController tuan) {
+        System.out.println("Mời bạn nhập id cửa hàng");
+        Scanner scanner1=new Scanner(System.in);
+        String idShop=scanner1.nextLine();
+        tuan.getSumOfMoney(idShop);
     }
 
     private static void deleteFruit(ProductController tuan) {
@@ -291,6 +305,10 @@ public class Main {
         System.out.println("9. Sửa thông tin quả");
         System.out.println("10. Xóa quả");
         System.out.println("11. Hiển thị tất cả sản phẩm");
+        System.out.println("12. Tính tổng tiền của tất cả sản phẩm trong một cửa hàng");
+        System.out.println("13. Sắp xếp các cửa hàng theo Id");
+        System.out.println("14. Sắp xếp các sản phẩm theo Id");
+        System.out.println("15. Hủy bỏ các sản phẩm hết hạn");
     }
 
     private static Shop getNewShop() {

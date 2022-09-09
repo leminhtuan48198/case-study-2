@@ -3,7 +3,9 @@ package model;
 import java.io.Serializable;
 import java.time.LocalDate;
 
-public class Fruit extends Product implements ExpiredDate,Money, Serializable {
+import static java.time.temporal.ChronoUnit.DAYS;
+
+public class Fruit extends Product implements Serializable {
     private int quantity;
 
     public Fruit() {
@@ -37,5 +39,12 @@ public class Fruit extends Product implements ExpiredDate,Money, Serializable {
         return super.toString()+"Fruit{" +
                 "quantity=" + quantity +
                 '}';
+    }
+
+    @Override
+    public boolean isExpired() {
+        LocalDate now=LocalDate.now();
+        long numberDay=DAYS.between(this.getExpiredDate(),now);
+        return numberDay>0;
     }
 }
