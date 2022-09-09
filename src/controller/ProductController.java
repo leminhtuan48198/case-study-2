@@ -4,6 +4,7 @@ import model.Fruit;
 import model.Meat;
 import model.Product;
 import model.Shop;
+import storage.product.ReadWriteProduct;
 
 import java.time.LocalDate;
 import java.util.LinkedList;
@@ -18,9 +19,10 @@ public class ProductController {
     public ProductController(String name) {
         this.name = name;
     }
-   static List<Product> productList=new LinkedList();
+   static List<Product> productList= ReadWriteProduct.getInstance().readData();
     public void addNewMeat(Meat meat){
         productList.add(meat);
+        ReadWriteProduct.getInstance().writeData(productList);
     }
     public int getIndexMeatById(String id){
         int index=-1;
@@ -47,6 +49,7 @@ public class ProductController {
         productList.get(index).setManufactureDate(LocalDate.of(year,month,day));
         Meat meat =(Meat) productList.get(index);
         meat.setWeight(weight);
+        ReadWriteProduct.getInstance().writeData(productList);
     }
     public void editFruit(int index,String name, Shop shop, double price, int year,int month,int day,int quantity){
         productList.get(index).setName(name);
@@ -55,15 +58,19 @@ public class ProductController {
         productList.get(index).setManufactureDate(LocalDate.of(year,month,day));
         Fruit fruit =(Fruit) productList.get(index);
         fruit.setQuantity(quantity);
+        ReadWriteProduct.getInstance().writeData(productList);
     }
     public void removeMeat(int index){
         productList.remove(index);
+        ReadWriteProduct.getInstance().writeData(productList);
     }
     public void removeFruit(int index){
         productList.remove(index);
+        ReadWriteProduct.getInstance().writeData(productList);
     }
     public void addNewFruit(Fruit fruit){
         productList.add(fruit);
+        ReadWriteProduct.getInstance().writeData(productList);
     }
     public void displayAllProduct(){
         for (int i = 0; i < productList.size(); i++) {
@@ -71,4 +78,12 @@ public class ProductController {
         }
     }
 
+    public void deleteShop(String id) {
+        for (int i = 0; i < productList.size(); i++) {
+            if(productList.get(i).getShop().getId().equals(id)){
+                productList.get(i).setShop(null);
+            }
+        }
+        ReadWriteProduct.getInstance().writeData(productList);
+    }
 }

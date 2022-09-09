@@ -27,7 +27,7 @@ public class Main {
                     editShop(boss);
                     break;
                 case 3:
-                    deleteShop(boss);
+                    deleteShop(boss,tuan);
                     break;
                 case 4:
                     boss.displayShops();
@@ -47,14 +47,15 @@ public class Main {
                     break;
 
                 case 9:
-                    editFruit(boss, tuan);
+                    deleteFruit(boss, tuan);
 
                     break;
                 case 10:
-                    editFruit(tuan);
+                    deleteFruit(tuan);
                     break;
                 case 11:
                     tuan.displayAllProduct();
+                    break;
 
                 case 0:
                     System.exit(0);
@@ -63,7 +64,7 @@ public class Main {
 
     }
 
-    private static void editFruit(ProductController tuan) {
+    private static void deleteFruit(ProductController tuan) {
         int index;
         String id;
         System.out.println("Mời bạn nhập id quả cần xóa");
@@ -150,7 +151,7 @@ public class Main {
         }
     }
 
-    private static void deleteShop(ShopController boss) {
+    private static void deleteShop(ShopController boss,ProductController tuan) {
         String id;
         int index;
         System.out.println("Mời bạn nhập id cửa hàng cần xóa");
@@ -158,6 +159,7 @@ public class Main {
         id =scanner4.nextLine();
         index= boss.findShopIndexById(id);
         boss.deleteShop(index);
+        tuan.deleteShop(id);
     }
 
     private static void editShop(ShopController boss) {
@@ -174,7 +176,7 @@ public class Main {
         boss.editShop(index,name,address);
     }
 
-    private static void editFruit(ShopController boss, ProductController tuan) {
+    private static void deleteFruit(ShopController boss, ProductController tuan) {
         int index;
         String name;
         String id;

@@ -1,9 +1,13 @@
 package controller;
 
 import model.Shop;
+import storage.product.ReadWriteProduct;
+import storage.shop.ReadWriteShop;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static controller.ProductController.productList;
 
 public class ShopController {
     private String name;
@@ -14,9 +18,11 @@ public class ShopController {
     public ShopController(String name) {
         this.name = name;
     }
-    static List<Shop> shopList=new ArrayList<>();
+    static List<Shop> shopList= ReadWriteShop.getInstance().readData();
     public void addNewShop(Shop shop){
         shopList.add(shop);
+        ReadWriteShop.getInstance().writeData(shopList);
+        ReadWriteProduct.getInstance().writeData(productList);
     }
     public int findShopIndexById(String id){
         int index=-1;
@@ -31,15 +37,16 @@ public class ShopController {
         if(index>-1){
             shopList.get(index).setName(name);
             shopList.get(index).setAddress(address);
+            ReadWriteShop.getInstance().writeData(shopList);
+            ReadWriteProduct.getInstance().writeData(productList);
         }else{
             System.out.println("Không tìm thấy Id phù hợp");
         }
     }
     public void deleteShop(int index){
         if(index>-1) {
-           Shop deletedShop=shopList.get(index);
            shopList.remove(index);
-            deletedShop=null;
+            ReadWriteShop.getInstance().writeData(shopList);
         }else{
             System.out.println("Không tìm thấy Id phù hợp");
         }

@@ -1,4 +1,7 @@
 package storage.product;
 
-public interface IReadWriteProduct {
+import model.Product;
+import storage.InterfaceGenericReadWriteData;
+
+public interface IReadWriteProduct extends InterfaceGenericReadWriteData<Product> {
 }
