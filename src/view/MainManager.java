@@ -1,5 +1,6 @@
 package view;
 
+import controller.CustomerOrderController;
 import controller.ProductController;
 import controller.ShopController;
 import model.Fruit;
@@ -13,11 +14,12 @@ public class MainManager {
     public static void main(String[] args) {
         ShopController boss = new ShopController();
         ProductController tuan= new ProductController("tuan");
-        displayMainScreen(boss,tuan);
+        CustomerOrderController tuanLeMinh=new CustomerOrderController();
+        displayMainScreen(boss,tuan,tuanLeMinh);
 
     }
 
-    private static void displayMainScreen(ShopController boss, ProductController tuan) {
+    private static void displayMainScreen(ShopController boss, ProductController tuan,CustomerOrderController tuanLeMinh) {
         int choice=0;
         do{
             System.out.println("--Danh mục--");
@@ -30,16 +32,16 @@ public class MainManager {
             choice=scanner.nextInt();
             switch (choice){
                 case 1:
-                    displayShopMenu(boss,tuan);
+                    displayShopMenu(boss,tuan,tuanLeMinh);
                     break;
                 case 2:
-                    displayMeatMenu(boss,tuan);
+                    displayMeatMenu(boss,tuan,tuanLeMinh);
                     break;
                 case 3:
-                    displayFruitMenu(boss,tuan);
+                    displayFruitMenu(boss,tuan,tuanLeMinh);
                     break;
                 case 4:
-                    displayOthers(boss,tuan);
+                    displayOthers(boss,tuan,tuanLeMinh);
                     break;
                 case 0:
                     System.exit(0);
@@ -47,13 +49,14 @@ public class MainManager {
         } while (choice!=0);
     }
 
-    private static void displayOthers(ShopController boss, ProductController tuan) {
+    private static void displayOthers(ShopController boss, ProductController tuan, CustomerOrderController tuanLeMinh) {
         int choice=0;
         do{
             System.out.println("--Danh mục các chức năng khác--");
             System.out.println("1. Hiển thị tất cả sản phẩm");
             System.out.println("2. Sắp xếp các sản phẩm theo Id");
             System.out.println("3. Hủy bỏ các sản phẩm hết hạn");
+            System.out.println("4. Theo dõi các đơn hàng chưa đóng đơn");
             System.out.println("0. Trở lại");
             Scanner scanner=new Scanner(System.in);
             choice=scanner.nextInt();
@@ -67,13 +70,15 @@ public class MainManager {
                 case 3:
                     tuan.deleteOldProduct();
                     break;
+                case 4:
+                    tuanLeMinh.showNotReceivedOrder();
                 case 0:
-                    displayMainScreen(boss,tuan);
+                    displayMainScreen(boss,tuan,tuanLeMinh);
             }
         } while (choice!=0);
     }
 
-    private static void displayShopMenu(ShopController boss, ProductController tuan) {
+    private static void displayShopMenu(ShopController boss, ProductController tuan,CustomerOrderController tuanLeMinh) {
         int choice=0;
         do{
             System.out.println("--Danh mục quản lí cửa hàng--");
@@ -107,7 +112,7 @@ public class MainManager {
                     displayProductsInShop(tuan);
                     break;
                 case 0:
-                    displayMainScreen(boss,tuan);
+                    displayMainScreen(boss,tuan,tuanLeMinh);
 
             }
 
@@ -121,7 +126,7 @@ public class MainManager {
         tuan.displayProductsInShop(idShop);
     }
 
-    private static void displayMeatMenu(ShopController boss, ProductController tuan) {
+    private static void displayMeatMenu(ShopController boss, ProductController tuan, CustomerOrderController tuanLeMinh) {
         int choice=0;
         do{
             System.out.println("--Danh mục quản lí thịt--");
@@ -146,7 +151,7 @@ public class MainManager {
                     tuan.displayMeatList();
                     break;
                 case 0:
-                    displayMainScreen(boss,tuan);
+                    displayMainScreen(boss,tuan,tuanLeMinh);
 
             }
 
@@ -155,7 +160,7 @@ public class MainManager {
 
 
 
-    private static void displayFruitMenu(ShopController boss, ProductController tuan) {
+    private static void displayFruitMenu(ShopController boss, ProductController tuan, CustomerOrderController tuanLeMinh) {
         int choice=0;
         do{
             System.out.println("--Danh mục quản lí hoa quả--");
@@ -182,7 +187,7 @@ public class MainManager {
                     tuan.displayFruitList();
                     break;
                 case 0:
-                    displayMainScreen(boss,tuan);
+                    displayMainScreen(boss,tuan,tuanLeMinh);
 
             }
 

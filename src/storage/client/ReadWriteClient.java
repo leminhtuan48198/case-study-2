@@ -27,11 +27,11 @@ public class ReadWriteClient implements IReadWriteClient {
         ois.close();
         fis.close();
        } catch (FileNotFoundException e) {
-           throw new RuntimeException(e);
+           e.printStackTrace();
        } catch (IOException e) {
-           throw new RuntimeException(e);
+           e.printStackTrace();
        } catch (ClassNotFoundException e) {
-           throw new RuntimeException(e);
+           e.printStackTrace();
        }
         return clientList;
     }
@@ -45,9 +45,9 @@ public class ReadWriteClient implements IReadWriteClient {
         oos.close();
         fos.close();
         } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
 
     }

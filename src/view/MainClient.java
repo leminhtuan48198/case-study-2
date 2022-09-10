@@ -1,6 +1,7 @@
 package view;
 
 import controller.ClientController;
+import controller.CustomerOrderController;
 import controller.ProductController;
 import model.Client;
 import model.Product;
@@ -11,10 +12,11 @@ public class MainClient {
     public static void main(String[] args) {
         ClientController tuanLe =new ClientController();
         ProductController tuan=new ProductController();
-        showMenuClient(tuanLe,tuan);
+        CustomerOrderController tuanLeMinh=new CustomerOrderController();
+        showMenuClient(tuanLe,tuan,tuanLeMinh);
     }
 
-    private static void showMenuClient(ClientController tuanLe,ProductController tuan) {
+    private static void showMenuClient(ClientController tuanLe, ProductController tuan, CustomerOrderController tuanLeMinh) {
         int choice=0;
         Scanner scanner=new Scanner(System.in);
         do{
@@ -34,7 +36,7 @@ public class MainClient {
                         String pass=scanner2.nextLine();
                         if(tuanLe.checkPass(client,pass)){
                             System.out.println(" Đăng nhập thành công");
-                            goToShop(client,tuanLe,tuan);
+                            goToShop(client,tuanLe,tuan,tuanLeMinh);
                         }
                     }
                     break;
@@ -49,7 +51,17 @@ public class MainClient {
                     System.out.println("Mời nhập password");
                     Scanner scanner2 =new Scanner(System.in);
                     String pass=scanner2.nextLine();
-                    tuanLe.creatNewAccount(id,pass);
+                    System.out.println("Mời nhập tên");
+                    Scanner scanner5 =new Scanner(System.in);
+                    String name=scanner5.nextLine();
+                    System.out.println("Mời nhập địa chỉ");
+                    Scanner scanner4 =new Scanner(System.in);
+                    String address=scanner4.nextLine();
+                    System.out.println("Mời nhập số điện thoại");
+                    Scanner scanner6 =new Scanner(System.in);
+                    String phoneNumber=scanner6.nextLine();
+
+                    tuanLe.creatNewAccount(id,name,address,phoneNumber,pass);
                         System.out.println("Đăng kí thành công tài khoản");
                     }
                     break;
@@ -59,7 +71,7 @@ public class MainClient {
         }while(choice!=0);
     }
 
-    private static void goToShop(Client client, ClientController tuanLe,ProductController tuan) {
+    private static void goToShop(Client client, ClientController tuanLe,ProductController tuan,CustomerOrderController tuanLeMinh) {
         int choice=0;
         Scanner scanner=new Scanner(System.in);
         do{
@@ -72,6 +84,8 @@ public class MainClient {
             System.out.println("7. Xóa giỏ hàng");
             System.out.println("8. Tính tiền giỏ hàng");
             System.out.println("9. Thanh toán");
+            System.out.println("10. Xem giỏ hàng đang vận chuyển");
+            System.out.println("11. Xác nhận nhận hàng");
             System.out.println("0. Đăng xuất");
             choice=scanner.nextInt();
              switch (choice){
@@ -150,12 +164,22 @@ public class MainClient {
                      if(tuanLe.checkAvailable(client) && tuanLe.getSumOfCart(client)<client.getMoney()){
                          tuan.subtractProduct(client);
                          tuanLe.subtractMoney(client);
+                         tuanLeMinh.createNewOrder(client);
                          tuanLe.deleteCart(client);
                          System.out.println("Thanh toán thành công");
                      }
                      break;
+                 case 10:
+                     tuanLeMinh.showWaitCart(client);
+                     break;
+                 case 11:
+                     System.out.println("Mời nhập mã đơn hàng đã nhận");
+                     Scanner scanner4=new Scanner(System.in);
+                      index=scanner4.nextInt();
+                     tuanLeMinh.conformReceived(client,index);
+                     break;
                  case 0:
-                     showMenuClient(tuanLe, tuan);
+                     showMenuClient(tuanLe, tuan, tuanLeMinh);
 
 
              }

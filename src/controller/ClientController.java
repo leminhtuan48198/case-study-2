@@ -12,8 +12,8 @@ public class ClientController implements Serializable {
     }
     public static List<Client> clientList= ReadWriteClient.getInstance().readData();
 
-    public void creatNewAccount(String id, String pass) {
-        clientList.add(new Client(id,pass));
+    public void creatNewAccount(String id,String name,String address,String phoneNumber, String pass) {
+        clientList.add(new Client(id,name,address,phoneNumber,pass));
         ReadWriteClient.getInstance().writeData(clientList);
     }
 
