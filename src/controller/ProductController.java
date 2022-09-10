@@ -1,9 +1,6 @@
 package controller;
 
-import model.Fruit;
-import model.Meat;
-import model.Product;
-import model.Shop;
+import model.*;
 import storage.product.ReadWriteProduct;
 
 import java.time.LocalDate;
@@ -137,6 +134,27 @@ public class ProductController {
                 Fruit fruit=(Fruit)productList.get(i);
                 System.out.println(fruit);
             }
+        }
+    }
+
+    public Product getProductById(String id) {
+        for (int i = 0; i < productList.size(); i++) {
+            if(productList.get(i).getId().equals(id)){
+                return productList.get(i);
+            }
+
+        }return null;
+    }
+
+    public void subtractProduct(Client client) {
+        for (int i = 0; i < client.getCart().size(); i++) {
+            for (int j = 0; j < productList.size(); j++) {
+                if(client.getCart().get(i)==productList.get(j)){
+                    productList.get(j).subtractByNumber(client.getCount().get(i));
+                }
+
+            }
+
         }
     }
 }

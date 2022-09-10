@@ -49,4 +49,14 @@ public class Meat extends Product implements Serializable {
         return number<0;
 
     }
+
+    @Override
+    public double getWeightOrQuantity() {
+        return this.weight;
+    }
+
+    @Override
+    public void subtractByNumber(double number) {
+        this.setWeight(this.getWeight()-number);
+    }
 }

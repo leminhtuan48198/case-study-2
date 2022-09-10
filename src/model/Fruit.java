@@ -47,4 +47,14 @@ public class Fruit extends Product implements Serializable {
         long numberDay=DAYS.between(this.getExpiredDate(),now);
         return numberDay>0;
     }
+
+    @Override
+    public double getWeightOrQuantity() {
+        return this.quantity;
+    }
+
+    @Override
+    public void subtractByNumber(double number) {
+        this.setQuantity(this.getQuantity()-(int)number);
+    }
 }

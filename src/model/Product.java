@@ -76,4 +76,6 @@ public abstract class Product implements ExpiredDate,Money,Comparable<Product>, 
     public int compareTo(Product product) {
         return this.id.compareTo(product.id);
     }
+    public abstract double getWeightOrQuantity();
+    public abstract void subtractByNumber(double number);
 }
