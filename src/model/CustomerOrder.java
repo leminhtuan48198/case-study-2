@@ -1,9 +1,10 @@
 package model;
 
+import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
 
-public class CustomerOrder {
+public class CustomerOrder implements Serializable {
     private Client client;
     private LinkedList<Product> cart1;
     private LinkedList<Double> count1;

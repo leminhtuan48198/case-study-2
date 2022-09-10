@@ -41,16 +41,25 @@ public class MainClient {
                     }
                     break;
                 case 2:
-                    System.out.println("Mời nhập ID");
-                    Scanner scanner1 =new Scanner(System.in);
-                     id=scanner1.nextLine();
+                    do{
+                        System.out.println("Mời nhập ID có độ tài từ 6 đến 12 ký tự, không có khoảng trắng và không dấu:");
+                        Scanner scanner1 =new Scanner(System.in);
+                        id=scanner1.nextLine();
+                    }while(!id.matches("[a-z0-9_-]{6,12}$"));
+
                      client= tuanLe.findClientByID(id);
                     if (client!=null){
                         System.out.println("Tài khoản đã tồn tại");
                     }else {
-                    System.out.println("Mời nhập password");
+                        String pass;
+                    do{System.out.println("Mời nhập password,  Phải chứa ít nhất 1 ký tự số từ 0 – 9\n" +
+                            "         Phải chứa ít nhất 1 ký tự chữ thường\n" +
+                            "         Phải chứa ít nhất 1 ký tự chữ hoa\n" +
+                            "         Phải chứa ít nhất 1 ký tự trong tập các ký tự đặc biệt");
                     Scanner scanner2 =new Scanner(System.in);
-                    String pass=scanner2.nextLine();
+                    pass=scanner2.nextLine();
+                    }while (!pass.matches("((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%!]).{6,20})"));
+
                     System.out.println("Mời nhập tên");
                     Scanner scanner5 =new Scanner(System.in);
                     String name=scanner5.nextLine();
@@ -150,11 +159,13 @@ public class MainClient {
                              System.out.println("Số lượng bạn nhập không hợp lệ");
                          }
                      }
+                     break;
 
 
                  case 7:
                      tuanLe.deleteCart(client);
                      System.out.println("Đã xóa thành công giỏ hàng");
+                     break;
                  case 8:
 
                      System.out.println("Tổng giá trị giỏ hàng là "+tuanLe.getSumOfCart(client));
@@ -167,6 +178,8 @@ public class MainClient {
                          tuanLeMinh.createNewOrder(client);
                          tuanLe.deleteCart(client);
                          System.out.println("Thanh toán thành công");
+                     }else{
+                         System.out.println("Bạn không còn đủ tiền hoặc cửa hàng đã hết sản phẩm bạn muốn mua");
                      }
                      break;
                  case 10:
