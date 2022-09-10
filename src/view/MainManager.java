@@ -22,12 +22,7 @@ public class MainManager {
     private static void displayMainScreen(ShopController boss, ProductController tuan,CustomerOrderController tuanLeMinh) {
         int choice=0;
         do{
-            System.out.println("--Danh mục--");
-            System.out.println("1. Quản lí cửa hàng");
-            System.out.println("2. Quản lí sản phẩm thịt");
-            System.out.println("3. Quản lí sản phẩm quả");
-            System.out.println("4. Các chức năng khác");
-            System.out.println("0. Kết thúc");
+            showMenu();
             Scanner scanner=new Scanner(System.in);
             choice=scanner.nextInt();
             switch (choice){
@@ -49,15 +44,19 @@ public class MainManager {
         } while (choice!=0);
     }
 
+    private static void showMenu() {
+        System.out.println("--Danh mục--");
+        System.out.println("1. Quản lí cửa hàng");
+        System.out.println("2. Quản lí sản phẩm thịt");
+        System.out.println("3. Quản lí sản phẩm quả");
+        System.out.println("4. Các chức năng khác");
+        System.out.println("0. Kết thúc");
+    }
+
     private static void displayOthers(ShopController boss, ProductController tuan, CustomerOrderController tuanLeMinh) {
         int choice=0;
         do{
-            System.out.println("--Danh mục các chức năng khác--");
-            System.out.println("1. Hiển thị tất cả sản phẩm");
-            System.out.println("2. Sắp xếp các sản phẩm theo Id");
-            System.out.println("3. Hủy bỏ các sản phẩm hết hạn");
-            System.out.println("4. Theo dõi các đơn hàng chưa đóng đơn");
-            System.out.println("0. Trở lại");
+            showOtherFunction();
             Scanner scanner=new Scanner(System.in);
             choice=scanner.nextInt();
             switch (choice){
@@ -78,17 +77,19 @@ public class MainManager {
         } while (choice!=0);
     }
 
+    private static void showOtherFunction() {
+        System.out.println("--Danh mục các chức năng khác--");
+        System.out.println("1. Hiển thị tất cả sản phẩm");
+        System.out.println("2. Sắp xếp các sản phẩm theo Id");
+        System.out.println("3. Hủy bỏ các sản phẩm hết hạn");
+        System.out.println("4. Theo dõi các đơn hàng chưa đóng đơn");
+        System.out.println("0. Trở lại");
+    }
+
     private static void displayShopMenu(ShopController boss, ProductController tuan,CustomerOrderController tuanLeMinh) {
         int choice=0;
         do{
-            System.out.println("--Danh mục quản lí cửa hàng--");
-            System.out.println("1. Thêm cửa hàng");
-            System.out.println("2. Sửa thông tin cửa hàng theo Id");
-            System.out.println("3. Xóa cửa hàng theo Id");
-            System.out.println("4. Hiển thị thông tin các cửa hàng");
-            System.out.println("5. Tính tổng tiền của tất cả sản phẩm trong một cửa hàng");
-            System.out.println("6. Hiển thị các sản phẩm trong một cửa hàng");
-            System.out.println("0. Quay lại");
+            showShopManager();
             Scanner scanner=new Scanner(System.in);
             choice =scanner.nextInt();
             switch (choice){
@@ -119,6 +120,17 @@ public class MainManager {
         }while(choice!=0);
     }
 
+    private static void showShopManager() {
+        System.out.println("--Danh mục quản lí cửa hàng--");
+        System.out.println("1. Thêm cửa hàng");
+        System.out.println("2. Sửa thông tin cửa hàng theo Id");
+        System.out.println("3. Xóa cửa hàng theo Id");
+        System.out.println("4. Hiển thị thông tin các cửa hàng");
+        System.out.println("5. Tính tổng tiền của tất cả sản phẩm trong một cửa hàng");
+        System.out.println("6. Hiển thị các sản phẩm trong một cửa hàng");
+        System.out.println("0. Quay lại");
+    }
+
     private static void displayProductsInShop(ProductController tuan) {
         System.out.println("Mời bạn nhập id cửa hàng");
         Scanner scanner= new Scanner(System.in);
@@ -129,12 +141,7 @@ public class MainManager {
     private static void displayMeatMenu(ShopController boss, ProductController tuan, CustomerOrderController tuanLeMinh) {
         int choice=0;
         do{
-            System.out.println("--Danh mục quản lí thịt--");
-            System.out.println("1. Thêm thịt");
-            System.out.println("2. Sửa thông tin thịt");
-            System.out.println("3. Xóa thịt");
-            System.out.println("4. Hiển thị danh sách thịt");
-            System.out.println("0. Quay lại");
+            showMeatManager();
             Scanner scanner=new Scanner(System.in);
             choice =scanner.nextInt();
             switch (choice){
@@ -158,17 +165,20 @@ public class MainManager {
         }while(choice!=0);
     }
 
+    private static void showMeatManager() {
+        System.out.println("--Danh mục quản lí thịt--");
+        System.out.println("1. Thêm thịt");
+        System.out.println("2. Sửa thông tin thịt");
+        System.out.println("3. Xóa thịt");
+        System.out.println("4. Hiển thị danh sách thịt");
+        System.out.println("0. Quay lại");
+    }
 
 
     private static void displayFruitMenu(ShopController boss, ProductController tuan, CustomerOrderController tuanLeMinh) {
         int choice=0;
         do{
-            System.out.println("--Danh mục quản lí hoa quả--");
-            System.out.println("1. Thêm quả");
-            System.out.println("2. Sửa thông tin quả");
-            System.out.println("3. Xóa quả");
-            System.out.println("4. Hiển thị danh sách quả");
-            System.out.println("0. Quay lại");
+            showFruitManager();
             Scanner scanner=new Scanner(System.in);
             choice =scanner.nextInt();
             switch (choice){
@@ -192,6 +202,15 @@ public class MainManager {
             }
 
         }while(choice!=0);
+    }
+
+    private static void showFruitManager() {
+        System.out.println("--Danh mục quản lí hoa quả--");
+        System.out.println("1. Thêm quả");
+        System.out.println("2. Sửa thông tin quả");
+        System.out.println("3. Xóa quả");
+        System.out.println("4. Hiển thị danh sách quả");
+        System.out.println("0. Quay lại");
     }
 
     private static void getMoneyOfShop(ProductController tuan) {
@@ -366,7 +385,6 @@ public class MainManager {
          id= scanner.nextLine();
         index=tuan.getIndexFruitById(id);
         }while (index>-1);
-
         System.out.println("Mời bạn nhập tên quả");
         Scanner scanner1 = new Scanner(System.in);
         String name = scanner1.nextLine();
