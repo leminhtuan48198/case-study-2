@@ -102,15 +102,10 @@ public class MainClient {
                      }else {
                          System.out.println("Nhập số lượng sản phẩm");
                          Scanner scanner3=new Scanner(System.in);
-                         double count=scanner3.nextDouble();
-                         if(count>0) {
+                         double numberWantToBuy=scanner3.nextDouble();
+                         if(numberWantToBuy>0) {
                              int position = tuanLe.checkProductInCart(client, product);
-                             if (position == -1) {
-                                 client.getCart().add(product);
-                                 client.getCount().add(count);
-                             } else {
-                                 client.getCount().set(position, count + client.getCount().get(position));
-                             }
+                             tuanLe.addProductToCart(position,client,numberWantToBuy,product);
                              System.out.println("Thêm hàng thành công");
                          }else {
                              System.out.println("Số lượng sản phẩm không hợp lệ");
@@ -134,7 +129,8 @@ public class MainClient {
                          Scanner scanner4=new Scanner(System.in);
                          double weightOrQuantity=scanner4.nextDouble();
                          if(weightOrQuantity>0) {
-                             client.getCount().set(index, weightOrQuantity);
+                             tuanLe.editCart(client,index,weightOrQuantity);
+
                              System.out.println("Đã sửa thành công");
                          }else {
                              System.out.println("Số lượng bạn nhập không hợp lệ");

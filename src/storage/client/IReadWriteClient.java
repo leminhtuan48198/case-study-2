@@ -1,4 +1,7 @@
 package storage.client;
 
-public interface IReadWriteClient {
+import model.Client;
+import storage.InterfaceGenericReadWriteData;
+
+public interface IReadWriteClient extends InterfaceGenericReadWriteData<Client> {
 }

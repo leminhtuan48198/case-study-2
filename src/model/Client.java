@@ -1,9 +1,10 @@
 package model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Client {
+public class Client implements Serializable {
     private String id;
     private String password;
     private List<Product> cart;

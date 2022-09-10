@@ -9,7 +9,7 @@ import model.Shop;
 import java.time.LocalDate;
 import java.util.Scanner;
 
-public class Main {
+public class MainManager {
     public static void main(String[] args) {
         ShopController boss = new ShopController();
         ProductController tuan= new ProductController("tuan");

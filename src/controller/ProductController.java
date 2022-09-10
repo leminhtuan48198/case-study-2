@@ -151,6 +151,7 @@ public class ProductController {
             for (int j = 0; j < productList.size(); j++) {
                 if(client.getCart().get(i)==productList.get(j)){
                     productList.get(j).subtractByNumber(client.getCount().get(i));
+                    ReadWriteProduct.getInstance().writeData(productList);
                 }
 
             }

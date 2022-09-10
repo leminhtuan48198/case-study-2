@@ -2,17 +2,19 @@ package controller;
 
 import model.Client;
 import model.Product;
+import storage.client.ReadWriteClient;
 
-import java.util.ArrayList;
+import java.io.Serializable;
 import java.util.List;
 
-public class ClientController {
+public class ClientController implements Serializable {
     public ClientController() {
     }
-    public static List<Client> clientList=new ArrayList<>();
+    public static List<Client> clientList= ReadWriteClient.getInstance().readData();
 
     public void creatNewAccount(String id, String pass) {
         clientList.add(new Client(id,pass));
+        ReadWriteClient.getInstance().writeData(clientList);
     }
 
     public Client findClientByID(String id) {
@@ -30,6 +32,7 @@ public class ClientController {
     public void increaseMoney(Client client, double money) {
         if(money>0){
             client.setMoney(client.getMoney()+money);
+            ReadWriteClient.getInstance().writeData(clientList);
 
         }else System.out.println("Số tiền phải là số dương");
     }
@@ -51,11 +54,13 @@ public class ClientController {
 
     public void subtractMoney(Client client) {
         client.setMoney(client.getMoney()-new ClientController().getSumOfCart(client));
+        ReadWriteClient.getInstance().writeData(clientList);
     }
 
     public void deleteCart(Client client) {
         client.getCart().clear();
         client.getCount().clear();
+        ReadWriteClient.getInstance().writeData(clientList);
     }
 
     public boolean checkAvailable(Client client) {
@@ -75,5 +80,20 @@ public class ClientController {
             }
         }
         return -1;
+    }
+
+    public void addProductToCart(int position, Client client, double numberWantToBuy, Product product) {
+        if (position == -1) {
+            client.getCart().add(product);
+            client.getCount().add(numberWantToBuy);
+        } else {
+            client.getCount().set(position, numberWantToBuy + client.getCount().get(position));
+        }
+        ReadWriteClient.getInstance().writeData(clientList);
+    }
+
+    public void editCart(Client client,int index,double weightOrQuantity) {
+        client.getCount().set(index, weightOrQuantity);
+        ReadWriteClient.getInstance().writeData(clientList);
     }
 }
