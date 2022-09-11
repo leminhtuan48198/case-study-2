@@ -37,7 +37,7 @@ public class CustomerOrderController {
 
     public void conformReceived(Client client, int index) {
         if(index<customerOrderList.size()&&index>-1){
-            if(customerOrderList.get(index).getClient()==client){
+            if(customerOrderList.get(index).getClient().getId().equals(client.getId())){
             customerOrderList.get(index).setReceived(true);
             ReadWriteCustomerOrder.getInstance().writeData(customerOrderList);
             System.out.println(" Cảm ơn bạn đã mua hàng");
