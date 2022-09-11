@@ -103,7 +103,7 @@ public class ProductController {
             }
         }
         ReadWriteProduct.getInstance().writeData(productList);
-        System.out.println("Đã xóa bỏ các sản phẩm hết hạn");
+
     }
 
     public void sortProductsById() {
@@ -149,11 +149,20 @@ public class ProductController {
     public void subtractProduct(Client client) {
         for (int i = 0; i < client.getCart().size(); i++) {
             for (int j = 0; j < productList.size(); j++) {
-                if(client.getCart().get(i)==productList.get(j)){
+                if(client.getCart().get(i).getId().equals(productList.get(j).getId())){
                     productList.get(j).subtractByNumber(client.getCount().get(i));
                     ReadWriteProduct.getInstance().writeData(productList);
                 }
 
+            }
+
+        }
+    }
+
+    public void disPlayExpiredProduct() {
+        for (int i = 0; i < productList.size(); i++) {
+            if(productList.get(i).isExpired()){
+                System.out.println(productList.get(i));
             }
 
         }

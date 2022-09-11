@@ -68,9 +68,13 @@ public class MainManager {
                     break;
                 case 3:
                     tuan.deleteOldProduct();
+                    System.out.println("Đã xóa bỏ các sản phẩm hết hạn");
                     break;
                 case 4:
                     tuanLeMinh.showNotReceivedOrder();
+                case 5:
+                    tuan.disPlayExpiredProduct();
+                    break;
                 case 0:
                     displayMainScreen(boss,tuan,tuanLeMinh);
             }
@@ -83,6 +87,7 @@ public class MainManager {
         System.out.println("2. Sắp xếp các sản phẩm theo Id");
         System.out.println("3. Hủy bỏ các sản phẩm hết hạn");
         System.out.println("4. Theo dõi các đơn hàng chưa đóng đơn");
+        System.out.println("5. Hiển thị các sản phẩm hết hạn");
         System.out.println("0. Trở lại");
     }
 
