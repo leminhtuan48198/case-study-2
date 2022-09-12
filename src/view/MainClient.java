@@ -156,7 +156,7 @@ public class MainClient {
     }
 
     private static void pay(Client client, ClientController tuanLe, ProductController tuan, CustomerOrderController tuanLeMinh) {
-        if(tuanLe.checkAvailable(client) && tuanLe.getSumOfCart(client)< client.getMoney()){
+        if(tuanLe.checkAvailable(client) && tuanLe.getSumOfCart(client)< client.getMoney()&&tuan.countProductInCart(client)){
             tuan.subtractProduct(client);
             tuanLe.subtractMoney(client);
             tuanLeMinh.createNewOrder(client);

@@ -71,7 +71,8 @@ public class ProductController {
     }
     public void displayAllProduct(){
         for (int i = 0; i < productList.size(); i++) {
-            System.out.println(productList.get(i));
+                System.out.println(productList.get(i));
+
         }
     }
 
@@ -158,6 +159,17 @@ public class ProductController {
 
         }
     }
+    public boolean countProductInCart(Client client){
+        int countProduct=0;
+        for (int i = 0; i < client.getCart().size(); i++) {
+            for (int j = 0; j < productList.size(); j++) {
+                if(client.getCart().get(i).getId().equals(productList.get(j).getId())){
+        countProduct++;
+                }
+            }
+        } return(countProduct==client.getCart().size());
+    }
+
 
     public void disPlayExpiredProduct() {
         for (int i = 0; i < productList.size(); i++) {
